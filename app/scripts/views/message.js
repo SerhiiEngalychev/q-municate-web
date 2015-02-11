@@ -66,7 +66,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
               occupants_names = (i + 1) === len ? occupants_names.concat(User.contact.full_name) : occupants_names.concat(User.contact.full_name).concat(', ');
           }
 
-          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           html += '<span class="message-avatar contact-avatar_message request-button_pending"></span>';
           html += '<div class="message-container-wrap">';
           html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -77,7 +77,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           break;
 
         case '2':
-          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           html += '<span class="message-avatar contact-avatar_message request-button_pending"></span>';
           html += '<div class="message-container-wrap">';
           html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -109,7 +109,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           break;
 
         case '4':
-          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           html += '<span class="message-avatar contact-avatar_message request-button_pending"></span>';
           html += '<div class="message-container-wrap">';
           html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -125,7 +125,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           break;
 
         case '5':
-          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           html += '<span class="message-avatar contact-avatar_message request-button_ok">&#10003;</span>';
           html += '<div class="message-container-wrap">';
           html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -141,7 +141,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           break;
 
         case '6':
-          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           html += '<span class="message-avatar contact-avatar_message request-button_cancel">&#10005;</span>';
           html += '<div class="message-container-wrap">';
           html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -157,7 +157,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           break;
 
         case '7':
-          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+          html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           html += '<span class="message-avatar contact-avatar_message request-button_pending"></span>';
           html += '<div class="message-container-wrap">';
           html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -175,7 +175,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         // calls messages
         case '8':
           if (message.caller) {
-            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-session="'+message.sessionID+'">';
+            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-session="'+message.sessionID+'" data-messageid="'+message.id+'">';
             if (message.caller === User.contact.id)
               html += '<span class="message-avatar contact-avatar_message request-call '+(message.callType === '1' ? 'request-video_outgoing' : 'request-audio_outgoing')+'"></span>';
             else
@@ -196,7 +196,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
 
         case '9':
           if (message.caller) {
-            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
             if (message.caller === User.contact.id)
               html += '<span class="message-avatar contact-avatar_message request-call '+(message.callType === '1' ? 'request-video_ended' : 'request-audio_ended')+'"></span>';
             else
@@ -217,7 +217,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
 
         case '10':
           if (message.caller) {
-            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
             html += '<span class="message-avatar contact-avatar_message request-call '+(message.callType === '1' ? 'request-video_ended' : 'request-audio_ended')+'"></span>';
             html += '<div class="message-container-wrap">';
             html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -235,7 +235,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
 
         case '11':
           if (message.caller) {
-            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+            html = '<article class="message message_service l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
             html += '<span class="message-avatar contact-avatar_message request-call '+(message.callType === '1' ? 'request-video_ended' : 'request-audio_ended')+'"></span>';
             html += '<div class="message-container-wrap">';
             html += '<div class="message-container l-flexbox l-flexbox_flexbetween l-flexbox_alignstretch">';
@@ -253,9 +253,9 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
 
         default:
           if (message.sender_id === User.contact.id)
-            html = '<article class="message is-own l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+            html = '<article class="message is-own l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
           else
-            html = '<article class="message l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
+            html = '<article class="message l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'" data-messageid="'+message.id+'">';
 
           // html += '<img class="message-avatar avatar contact-avatar_message" src="'+contact.avatar_url+'" alt="avatar">';
           html += '<div class="message-avatar avatar contact-avatar_message profileUserAvatar" style="background-image:url('+contact.avatar_url+')" data-id="'+message.sender_id+'"></div>';
@@ -270,7 +270,10 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
             html += '<div class="preview preview-photo" data-url="'+message.attachment.url+'" data-name="'+message.attachment.name+'">';
             html += '<img src="'+message.attachment.url+'" alt="attach">';
             html += '</div></div>';
-            html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
+            html += '</div>';
+            if (!window.onLine) html += '<img src="images/icon_notsent.svg" class="message-notsent" title="Message wasn\'t sent">';
+            html += '<time class="message-time">'+getTime(message.date_sent)+'</time>';
+            html += '<time class="message-read-time">'+(message.updated_at ? ('Seen at '+getTime(message.updated_at)) : '')+'</time>';
 
           } else if (attachType && attachType.indexOf('audio') > -1) {
 
@@ -278,7 +281,10 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
             html += message.attachment.name+'<br><br>';
             html += '<audio src="'+message.attachment.url+'" controls></audio>';
             html += '</div>';
-            html += '</div><time class="message-time">'+getTime(message.date_sent)+' ';
+            html += '</div>';
+            if (!window.onLine) html += '<img src="images/icon_notsent.svg" class="message-notsent" title="Message wasn\'t sent">';
+            html += '<time class="message-time">'+getTime(message.date_sent)+' ';
+            html += '<time class="message-read-time">'+(message.updated_at ? ('Seen at '+getTime(message.updated_at)) : '')+'</time>';
             html += '<a href="'+message.attachment.url+'" download="'+message.attachment.name+'">Download</a></time>';
 
           } else if (attachType && attachType.indexOf('video') > -1) {
@@ -287,7 +293,10 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
             html += message.attachment.name+'<br><br>';
             html += '<div class="preview preview-video" data-url="'+message.attachment.url+'" data-name="'+message.attachment.name+'"></div>';
             html += '</div>';
-            html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
+            html += '</div>';
+            if (!window.onLine) html += '<img src="images/icon_notsent.svg" class="message-notsent" title="Message wasn\'t sent">';
+            html += '<time class="message-time">'+getTime(message.date_sent)+'</time>';
+            html += '<time class="message-read-time">'+(message.updated_at ? ('Seen at '+getTime(message.updated_at)) : '')+'</time>';
 
           } else if (attachType) {
 
@@ -295,12 +304,18 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
             html += '<a class="attach-file" href="'+message.attachment.url+'" download="'+message.attachment.name+'">'+message.attachment.name+'</a>';
             html += '<span class="attach-size">'+getFileSize(message.attachment.size)+'</span>';
             html += '</div>';
-            html += '</div><time class="message-time">'+getTime(message.date_sent)+' ';
+            html += '</div>';
+            if (!window.onLine) html += '<img src="images/icon_notsent.svg" class="message-notsent" title="Message wasn\'t sent">';
+            html += '<time class="message-time">'+getTime(message.date_sent)+' ';
+            html += '<time class="message-read-time">'+(message.updated_at ? ('Seen at '+getTime(message.updated_at)) : '')+'</time>';
             html += '<a href="'+message.attachment.url+'" download="'+message.attachment.name+'">Download</a></time>';
 
           } else {
             html += '<div class="message-body">'+minEmoji(parser(message.body))+'</div>';
-            html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
+            html += '</div>';
+            if (!window.onLine) html += '<img src="images/icon_notsent.svg" class="message-notsent" title="Message wasn\'t sent">';
+            html += '<time class="message-time">'+getTime(message.date_sent)+'</time>';
+            html += '<time class="message-read-time">'+(message.updated_at ? ('Seen at '+getTime(message.updated_at)) : '')+'</time>';
           }
 
           html += '</div></div></article>';
@@ -344,6 +359,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           time = Math.floor(Date.now() / 1000),
           type = form.parents('.l-chat').is('.is-group') ? 'groupchat' : 'chat',
           dialogItem = type === 'groupchat' ? $('.l-list-wrap section:not(#searchList) .dialog-item[data-dialog="'+dialog_id+'"]') : $('.l-list-wrap section:not(#searchList) .dialog-item[data-id="'+id+'"]'),
+          messageId = QB.chat.helpers.getBsonObjectId(),
           copyDialogItem;
 
       if (val.length > 0) {
@@ -355,13 +371,14 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         }
         
         // send message
-        QB.chat.send(jid, {type: type, body: val, extension: {
+        QB.chat.send(jid, {id: messageId, type: type, body: val, extension: {
           save_to_history: 1,
           // dialog_id: dialog_id,
           date_sent: time
         }});
 
         message = Message.create({
+          _id: messageId,
           chat_dialog_id: dialog_id,
           body: val,
           date_sent: time,
@@ -383,7 +400,13 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
     },
 
     onMessage: function(id, message, recipientJid, isOfflineStorage) {
+      var senderJid = QB.chat.helpers.getUserJid(id, QMCONFIG.qbAccount.appId);
+
       if (message.type === 'error') return true;
+      if (message.markerType === 'received') return true;
+      if (message.type === 'chat' && !message.markerType && message.extension && !message.extension.notification_type) {
+        QB.chat.sendDeliveredMessage(senderJid, message.id);
+      }
 
       var DialogView = self.app.views.Dialog,
           hiddenDialogs = sessionStorage['QM.hiddenDialogs'] ? JSON.parse(sessionStorage['QM.hiddenDialogs']) : {},
@@ -408,17 +431,30 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
       msg.sender_id = id;
 
       if ((!deleted_id || msg.sender_id !== User.contact.id) && chat.is(':visible')) {
-        Message.update(msg.id, dialog_id);
+
+        if (!message.markerType) {
+          Message.update(msg.id, dialog_id);
+          if (message.type === 'chat') {
+            Message.sendRead(senderJid, msg.id);
+          }
+        }
+
       } else if (!chat.is(':visible') && chat.length > 0) {
-        msgArr = dialogs[dialog_id].messages || [];
-        msgArr.push(msg.id);
-        dialogs[dialog_id].messages = msgArr;
+
+        if (!message.markerType) {
+          msgArr = dialogs[dialog_id].messages || [];
+          msgArr.push(msg.id);
+          dialogs[dialog_id].messages = msgArr;
+        }
+
       }
 
       if ((!chat.is(':visible') || !window.isQMAppActive) && dialogItem.length > 0 && notification_type !== '1' && !isOfflineStorage) {
-        unread++;
-        dialogItem.find('.unread').text(unread);
-        DialogView.getUnreadCounter(dialog_id);
+        if (!message.markerType) {
+          unread++;
+          dialogItem.find('.unread').text(unread);
+          DialogView.getUnreadCounter(dialog_id);
+        }
       }
 
       // create new group chat
@@ -519,7 +555,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         }
       }
 
-      // if (QMCONFIG.debug) console.log(msg);
+      if (QMCONFIG.debug) console.log(msg);
       self.addItem(msg, true, true, recipientId);
       if ((!chat.is(':visible') || !window.isQMAppActive) && (message.type !== 'groupchat' || msg.sender_id !== User.contact.id))
         audioSignal.play();

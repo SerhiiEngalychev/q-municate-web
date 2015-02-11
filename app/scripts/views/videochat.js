@@ -194,10 +194,10 @@ define(['jquery', 'quickblox'], function($, QB) {
         function buildNewScreen(selector, mode) {
           if (mode === 'full') {
             selector.find('.mediacall').removeAttr('style');
-            selector.find('.btn_full-mode img').attr('src', 'images/icon-full-mode-off.png');
+            selector.find('.btn_full-mode img').attr('src', 'images/icon-full-mode-off.svg');
           } else {
             selector.find('.mediacall').attr('style', 'max-height:'+maxHeight);
-            selector.find('.btn_full-mode img').attr('src', 'images/icon-full-mode-on.png');
+            selector.find('.btn_full-mode img').attr('src', 'images/icon-full-mode-on.svg');
           }
           selector.find('#remoteStream')[0].play();
           selector.find('#localStream')[0].play();
@@ -394,7 +394,7 @@ define(['jquery', 'quickblox'], function($, QB) {
     html += '<span class="mediacall-info-duration is-hidden"></span>';
     html += '</div>';
     html += '<div class="mediacall-controls l-flexbox l-flexbox_flexcenter">';
-    html += '<button class="btn_mediacall btn_full-mode" data-id="'+userId+'" data-dialog="'+dialogId+'" disabled><img class="btn-icon_mediacall" src="images/icon-full-mode-on.png" alt="full mode"></button>';
+    html += '<button class="btn_mediacall btn_full-mode" data-id="'+userId+'" data-dialog="'+dialogId+'" disabled><img class="btn-icon_mediacall" src="images/icon-full-mode-on.svg" alt="full mode"></button>';
     html += '<button class="btn_mediacall btn_camera_off" data-id="'+userId+'" data-dialog="'+dialogId+'"><img class="btn-icon_mediacall" src="images/icon-camera-off.svg" alt="camera"></button>';
     html += '<button class="btn_mediacall btn_mic_off" data-id="'+userId+'" data-dialog="'+dialogId+'"><img class="btn-icon_mediacall" src="images/icon-mic-off.svg" alt="mic"></button>';
     html += '<button class="btn_mediacall btn_hangup" data-id="'+userId+'" data-dialog="'+dialogId+'"><img class="btn-icon_mediacall" src="images/icon-hangup.svg" alt="hangup"></button>';

@@ -335,6 +335,7 @@ define([
           dialog = dialogs[dialog_id],
           user = contacts[user_id],
           chat = $('.l-chat[data-dialog="'+dialog_id+'"]'),
+          senderJid = dialog.type === 3 && QB.chat.helpers.getUserJid(dialog.occupants_ids[0], QMCONFIG.qbAccount.appId) || null,
           html, jid, icon, name, status, message,
           self = this;
 
@@ -446,6 +447,9 @@ define([
 
         if (typeof dialog.messages !== 'undefined') {
           Message.update(dialog.messages.join(), dialog_id);
+          if (dialog.type === 3) {
+            Message.sendRead(senderJid, dialog.messages);
+          }
           dialog.messages = [];
         }
         

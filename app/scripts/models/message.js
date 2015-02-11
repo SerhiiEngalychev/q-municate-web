@@ -5,7 +5,7 @@
  *
  */
 
-define(function() {
+define(['quickblox'], function(QB) {
 
   function Message(app) {
     this.app = app;
@@ -33,6 +33,7 @@ define(function() {
       var User = this.app.models.User,
           message;
 
+      // console.log(params);
       message = {
         id: (params.extension && params.extension.message_id) || params._id || null,
         dialog_id: (params.extension && params.extension.dialog_id) || params.chat_dialog_id,
@@ -55,8 +56,12 @@ define(function() {
         caller: parseInt((params.extension && params.extension.caller)) || parseInt(params.caller) || null,
         callee: parseInt((params.extension && params.extension.callee)) || parseInt(params.callee) || null,
         duration: (params.extension && params.extension.duration) || params.duration || null,
-        sessionID: (params.extension && params.extension.sessionID) || params.sessionID || null
+        sessionID: (params.extension && params.extension.sessionID) || params.sessionID || null,
+
+        updated_at: params.markerMessageId ? Math.floor(Date.now() / 1000) : (params.updated_at && Math.floor(+new Date(params.updated_at) / 1000) || null)
       };
+
+      // console.log(message);
 
       if (message.attachment) {
         message.attachment.size = parseInt(message.attachment.size);
@@ -71,6 +76,16 @@ define(function() {
       QBApiCalls.updateMessage(message_id, {chat_dialog_id: dialog_id, read: 1}, function() {
         
       });
+    },
+
+    sendRead: function(senderJid, message_id) {
+      if (message_id instanceof Array) {
+        message_id.forEach(function(msg_id) {
+          QB.chat.sendReadMessage(senderJid, msg_id);
+        });
+      } else {
+        QB.chat.sendReadMessage(senderJid, message_id);
+      }
     }
 
   };

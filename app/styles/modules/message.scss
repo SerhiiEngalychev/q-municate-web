@@ -57,21 +57,30 @@
           .message-body a {
             color: #0d70b3;
           }
-      .message-time {
+      .message-time,
+      .message-read-time {
         font-size: 15px;
         line-height: 26px;
         color: #999;
         text-align: right;
       }
-        .message-time a {
+      .message-read-time {
+        display: none;
+        position: absolute;
+        right: 20px;
+      }
+        .message-time a,
+        .message-read-time a {
           font-size: 14px;
           color: #0d70b3;
         }
-        .message_attach_row .message-time {
+        .message_attach_row .message-time,
+        .message_attach_row .message-read-time {
           line-height: 28px;
         }
       
-      .message-time {
+      .message-time,
+      .message-read-time {
         margin-top: 5px;
       }
       .message-avatar.request-button_pending {
@@ -83,6 +92,16 @@
       .message-avatar.request-button_ok {
         margin: 3px 30px 0 10px;
       }
+
+      .message-notsent {
+        height: 16px;
+        margin-top: 10px;
+        margin-left: 25px;
+      }
+
+.l-chat .message[data-type="message"]:last-child .message-read-time {
+  display: block;
+}
 
 /* preview */
 .preview {
