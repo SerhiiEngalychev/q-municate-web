@@ -167,7 +167,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
             html += '<h4 class="message-author">You have deleted '+recipient.full_name+' from your contact list';
           else
             html += '<h4 class="message-author">You have been deleted from the contact list <button class="btn btn_request_again btn_request_again_delete"><img class="btn-icon btn-icon_request" src="images/icon-request.svg" alt="request">Send Request Again</button></h4>';
-            
+
           html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
           html += '</div></div></article>';
           break;
@@ -188,7 +188,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
               html += '<h4 class="message-author">Call to '+contacts[message.callee].full_name+', duration '+message.duration;
             else
               html += '<h4 class="message-author">Call from '+contacts[message.caller].full_name+', duration '+message.duration;
-              
+
             html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
             html += '</div></div></article>';
           }
@@ -209,7 +209,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
               html += '<h4 class="message-author">Call to '+contacts[message.callee].full_name+', no answer';
             else
               html += '<h4 class="message-author">Missed call from '+contacts[message.caller].full_name;
-              
+
             html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
             html += '</div></div></article>';
           }
@@ -227,7 +227,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
               html += '<h4 class="message-author">Call to '+contacts[message.callee].full_name+', busy';
             else
               html += '<h4 class="message-author">Call from '+contacts[message.caller].full_name+', busy';
-              
+
             html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
             html += '</div></div></article>';
           }
@@ -245,18 +245,20 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
               html += '<h4 class="message-author">'+contacts[message.callee].full_name+' doesn\'t have camera and/or microphone.';
             else
               html += '<h4 class="message-author">Camera and/or microphone wasn\'t found.';
-              
+
             html += '</div><time class="message-time">'+getTime(message.date_sent)+'</time>';
             html += '</div></div></article>';
           }
           break;
 
         default:
-          if (message.sender_id === User.contact.id)
+          if (message.sender_id === User.contact.id) {
             html = '<article class="message is-own l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
-          else
+        	console.log('ADD MESSAGE HTML Private');
+          }else{
             html = '<article class="message l-flexbox l-flexbox_alignstretch" data-id="'+message.sender_id+'" data-type="'+type+'">';
-
+          	console.log('ADD MESSAGE HTML');
+		  }
           // html += '<img class="message-avatar avatar contact-avatar_message" src="'+contact.avatar_url+'" alt="avatar">';
           html += '<div class="message-avatar avatar contact-avatar_message profileUserAvatar" style="background-image:url('+contact.avatar_url+')" data-id="'+message.sender_id+'"></div>';
           html += '<div class="message-container-wrap">';
@@ -319,7 +321,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         if (isCallback) {
           if (isMessageListener) {
             chat.find('.l-chat-content .mCSB_container').append(html);
-            
+
             // fix for custom scroll
             fixScroll(chat);
           } else {
@@ -333,7 +335,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         }
 
       });
-      
+
     },
 
     sendMessage: function(form) {
@@ -353,11 +355,11 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           });
           val = form.find('.textarea').text().trim();
         }
-        
+
         // send message
         QB.chat.send(jid, {type: type, body: val, extension: {
           save_to_history: 1,
-          // dialog_id: dialog_id,
+          dialog_id: dialog_id,
           date_sent: time
         }});
 
@@ -367,7 +369,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           date_sent: time,
           sender_id: User.contact.id
         });
-        if (QMCONFIG.debug) console.log(message);
+        // if (QMCONFIG.debug) console.log(message);
         if (type === 'chat') self.addItem(message, true, true);
 
         if (dialogItem.length > 0) {
@@ -376,7 +378,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
           $('#recentList ul').prepend(copyDialogItem);
           if (!$('#searchList').is(':visible')) {
            $('#recentList').removeClass('is-hidden');
-           isSectionEmpty($('#recentList ul')); 
+           isSectionEmpty($('#recentList ul'));
           }
         }
       }
@@ -467,7 +469,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         if (room_name) dialog.room_name = room_name;
         if (room_photo) dialog.room_photo = room_photo;
         if (dialog) ContactList.dialogs[dialog_id] = dialog;
-        
+
         // add new people
         if (occupants_ids) {
           ContactList.add(dialog.occupants_ids, null, function() {
@@ -475,7 +477,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
                 new_ids = _.difference(dialog.occupants_ids, ids),
                 contacts = ContactList.contacts,
                 new_id;
-            
+
             for (var i = 0, len = new_ids.length; i < len; i++) {
               new_id = new_ids[i];
               if (new_id !== User.contact.id.toString()) {
@@ -519,7 +521,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
         }
       }
 
-      // if (QMCONFIG.debug) console.log(msg);
+      if (QMCONFIG.debug) console.log(msg);
       self.addItem(msg, true, true, recipientId);
       if ((!chat.is(':visible') || !window.isQMAppActive) && (message.type !== 'groupchat' || msg.sender_id !== User.contact.id))
         audioSignal.play();
@@ -572,21 +574,21 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
   function parser(str) {
     var url, url_text;
     var URL_REGEXP = /\b((?:https?:\/\/|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}\/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'".,<>?«»“”‘’]))/gi;
-    
+
     str = escapeHTML(str);
-    
+
     // parser of paragraphs
     str = str.replace(/\n/g, '<br>');
-    
+
     // parser of links
     str = str.replace(URL_REGEXP, function(match) {
       url = (/^[a-z]+:/i).test(match) ? match : 'http://' + match;
       url_text = match;
       return '<a href="' + escapeHTML(url) + '" target="_blank">' + escapeHTML(url_text) + '</a>';
     });
-    
+
     return str;
-    
+
     function escapeHTML(s) {
       return s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
     }
@@ -602,7 +604,7 @@ define(['jquery', 'config', 'quickblox', 'underscore', 'minEmoji', 'timeago'],
     if ($('#requestsList').is('.is-hidden') &&
         $('#recentList').is('.is-hidden') &&
         $('#historyList').is('.is-hidden')) {
-      
+
       $('#emptyList').removeClass('is-hidden');
     }
   }
